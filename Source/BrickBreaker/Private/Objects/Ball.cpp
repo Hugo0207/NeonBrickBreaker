@@ -2,6 +2,7 @@
 
 
 #include "Objects/Ball.h"
+#include "Objects/Brick.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"

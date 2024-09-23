@@ -5,6 +5,7 @@
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
+#include "Objects/Ball.h"
 
 
 // Sets default values
@@ -75,27 +76,31 @@ void ABrick::UpdateBrickColor()
 // Called when an overlap happens
 void ABrick::OnOverlap(AActor* MyActor, AActor* OtherActor)
 {
-	Strength -= 1;
-	if (Strength == 0) {
-		if (Particle != NULL)
-		{
-			// Transform --> Location, Rotation, Scale
-			FTransform ParticleT;
-			// Spawn Location
-			ParticleT.SetLocation(this->GetActorLocation());
-			// World Size Particule
-			ParticleT.SetScale3D(FVector(1, 1, 1));
-			// Spawn Particule
-			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), Particle, ParticleT, true);
-		}
+	if (auto Ball = Cast<ABall>(OtherActor)) {
+		Strength -= 1;
+		if (Strength == 0) {
+			if (Particle != NULL)
+			{
+				// Transform --> Location, Rotation, Scale
+				FTransform ParticleT;
+				// Spawn Location
+				ParticleT.SetLocation(this->GetActorLocation());
+				// World Size Particule
+				ParticleT.SetScale3D(FVector(1, 1, 1));
+				// Spawn Particule
+				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), Particle, ParticleT, true);
+			}
 
-		if (DestroySound) {
-			UGameplayStatics::PlaySound2D(GetWorld(), DestroySound);
+			if (DestroySound) {
+				UGameplayStatics::PlaySound2D(GetWorld(), DestroySound);
+			}
+			Destroy();
+			Ball->Score += 300;
 		}
-		Destroy();
-	}
-	else {
-		this->UpdateBrickColor();
+		else {
+			Ball->Score += 100;
+			this->UpdateBrickColor();
+		}
 	}
 }
 

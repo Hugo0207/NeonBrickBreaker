@@ -24,6 +24,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Sound")
 	class USoundBase* HitSound;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int Score = 0;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float Speed = 1500;
 

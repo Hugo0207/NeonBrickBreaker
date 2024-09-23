@@ -38,9 +38,14 @@ void ABallDestroyer::OnOverlap(AActor* MyActor, AActor* OtherActor)
 {
 	if (auto Ball = Cast<ABall>(OtherActor)) {
 		Ball->Destroy();
+		Lives -= 1;
 		// Check object to spawn is not null
-		if (ObjectToSpawn)
+		if (ObjectToSpawn && Lives > 0)
 			GetWorld()->SpawnActor<AActor>(ObjectToSpawn, FVector(0, 0, 70), FRotator(0, 0, 0));
+
+		if (Lives == 0) {
+			
+		}
 	}
 }
 

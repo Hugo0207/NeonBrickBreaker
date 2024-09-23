@@ -22,6 +22,13 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor> ObjectToSpawn;
 
+	// Dynamic actor variable you can acces in UE editor
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UUserWidget> GameOverWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int Lives = 3;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

@@ -20,6 +20,7 @@ APawnPlayer::APawnPlayer()
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMesh->SetupAttachment(BoxCollision);
 
+	// Create MovementComponent
 	MovementComponent = CreateDefaultSubobject<UPawnMovementComponent, UFloatingPawnMovement>(TEXT("MovementComponent"));
 	MovementComponent->UpdatedComponent = BoxCollision;
 }
