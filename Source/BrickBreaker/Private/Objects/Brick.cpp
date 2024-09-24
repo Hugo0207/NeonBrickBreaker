@@ -94,8 +94,8 @@ void ABrick::OnOverlap(AActor* MyActor, AActor* OtherActor)
 			if (DestroySound) {
 				UGameplayStatics::PlaySound2D(GetWorld(), DestroySound);
 			}
-			Destroy();
 			Ball->Score += 300;
+			Destroy();
 		}
 		else {
 			Ball->Score += 100;

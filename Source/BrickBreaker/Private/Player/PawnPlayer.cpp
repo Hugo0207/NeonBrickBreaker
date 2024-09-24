@@ -5,6 +5,7 @@
 #include "Components/BoxComponent.h"
 #include "Objects/Ball.h"
 #include "GameFramework/FloatingPawnMovement.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 APawnPlayer::APawnPlayer()
@@ -29,9 +30,16 @@ APawnPlayer::APawnPlayer()
 void APawnPlayer::BeginPlay()
 {
 	Super::BeginPlay();
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+	if (PlayerController)
+		PlayerController->bShowMouseCursor = false;
+		PlayerController->SetInputMode(FInputModeGameOnly());
 
 	// Bind function OnActorBeginOverlap with your class function OnOverlap
 	this->OnActorBeginOverlap.AddDynamic(this, &APawnPlayer::OnOverlap);
+
+	SpawnPoint = this->GetActorLocation();
 	
 }
 

@@ -4,6 +4,8 @@
 #include "Objects/BallDestroyer.h"
 #include "Objects/Ball.h"
 #include "Components/BoxComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Player/PawnPlayer.h"
 
 // Sets default values
 ABallDestroyer::ABallDestroyer()
@@ -42,10 +44,11 @@ void ABallDestroyer::OnOverlap(AActor* MyActor, AActor* OtherActor)
 		// Check object to spawn is not null
 		if (ObjectToSpawn && Lives > 0)
 			GetWorld()->SpawnActor<AActor>(ObjectToSpawn, FVector(0, 0, 70), FRotator(0, 0, 0));
-
-		if (Lives == 0) {
-			
-		}
 	}
+
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+	if (auto PawnPlayer = Cast<APawnPlayer>(PlayerController->GetPawn()))
+		PawnPlayer->SetActorLocation(PawnPlayer->SpawnPoint);
 }
 

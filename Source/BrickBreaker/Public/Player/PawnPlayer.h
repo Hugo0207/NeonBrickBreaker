@@ -24,6 +24,9 @@ public:
 	UPROPERTY(Category = Pawn, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UPawnMovementComponent* MovementComponent;
 
+	UPROPERTY(VisibleAnywhere)
+	FVector SpawnPoint;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
