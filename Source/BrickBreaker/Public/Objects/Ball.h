@@ -28,7 +28,7 @@ public:
 	int Score = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float Speed = 1500;
+	float Speed = 2000;
 
 protected:
 	// Called when the game starts or when spawned
