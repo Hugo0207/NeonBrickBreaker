@@ -20,6 +20,8 @@ ABall::ABall()
 	// Create StaticMeshComponent and Attach to BoxComponent
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMesh->SetupAttachment(BoxCollision);
+
+	HitSound = LoadObject<USoundBase>(nullptr, TEXT("Sound'/Game/Sound/HitSound.HitSound'"));
 }
 
 // Called when the game starts or when spawned
